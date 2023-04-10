@@ -1,3 +1,4 @@
+wipe = true
 [psql]
 dbname = "hexagonal"
 host = "localhost"
