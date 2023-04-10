@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: ${APP_NAME-hexa}-database
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-user}
+      PGDATA: /data/postgres
+    volumes:
+      - ./docker/postgres:/data/postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+  pgadmin:
+    container_name: ${APP_NAME-hexa}-pgadmin
+    # image: dpage/pgadmin4
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-test@test.test}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-user}
+      PGADMIN_CONFIG_SERVER_MODE: 'False' 
+    volumes:
+      - ./docker/pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+
+networks:
+  postgres:
+    driver: bridge

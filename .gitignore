@@ -1,0 +1,6 @@
+.vscode
+.idea
+vendor
+tmp
+docker
+.env

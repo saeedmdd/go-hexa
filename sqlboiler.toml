@@ -1,0 +1,6 @@
+[psql]
+dbname = "hexagonal"
+host = "localhost"
+user = "user"
+pass = "user"
+sslmode = "disable"
