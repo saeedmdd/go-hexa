@@ -1,6 +1,6 @@
 wipe = true
 [psql]
-dbname = "hexagonal"
+dbname = "hexa"
 host = "localhost"
 user = "user"
 pass = "user"

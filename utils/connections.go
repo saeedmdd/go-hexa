@@ -5,10 +5,13 @@ import (
 	"database/sql"
 	"fmt"
 	"time"
+
+	_ "github.com/lib/pq"
 )
 
 // GetPostgresDsn generates
 func GetPostgresDsn(host, user, password, port, database, sslmode string) string {
+
 	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
 		user, password, host, port, database, sslmode)
 }
@@ -17,10 +20,15 @@ func GetPostgresDsn(host, user, password, port, database, sslmode string) string
 func PostgresConnection(host, user, password, port, database, sslmode string) (*sql.DB, error) {
 	dsn := GetPostgresDsn(host, user, password, port, database, sslmode)
 	conn, err := sql.Open("postgres", dsn)
-	if  err != nil {
+	if err != nil {
 		panic(err)
 	}
-	dbCOntext, _ := context.WithTimeout(context.Background(), 30 * time.Second)
+
+	dbCOntext, _ := context.
+		WithTimeout(
+			context.Background(),
+			30*time.Second,
+		)
 	if err = conn.PingContext(dbCOntext); err != nil {
 		panic(err)
 	}

@@ -43,7 +43,7 @@ rerun = false
 # Delay after each executions
 rerun_delay = 500
 # Add additional arguments when running binary (bin/full_bin). Will run './tmp/main hello world'.
-args_bin = ["hello", "world"]
+args_bin = ["serve", "world"]
 
 [log]
 # Show log time
