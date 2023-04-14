@@ -7,6 +7,9 @@ import (
 )
 
 type TaskUseCase interface {
-	SaveTask(ctx context.Context, task models.TaskModel) (int, error)
+	AllTasks(ctx context.Context) ([]*models.TaskModel, error)
+	SaveTask(ctx context.Context, task models.TaskModel) (*models.TaskModel, error)
 	GetTask(ctx context.Context, id int) (*models.TaskModel, error)
+	UpdateTask(ctx context.Context, id int, columns map[string]interface{}) (*models.TaskModel, error)
+	DeleteTask(ctx context.Context, id int) (bool, error)
 }

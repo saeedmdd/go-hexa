@@ -16,6 +16,6 @@ func middlewareApply(app *fiber.App) {
 	app.Use(logger.New(logger.Config{
 		Format:     "${pid} ${status} - ${method} ${path}\n",
 		TimeFormat: "02-Jan-2006",
-		TimeZone:   "America/New_York",
+		TimeZone:   "Asia/Tehran",
 	}))
 }

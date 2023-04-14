@@ -21,9 +21,11 @@ func Init() {
 	taskUseCase := usecase.NewTaskHandler(taskRepository)
 	taskController := NewTaskHttpController(taskUseCase)
 	app := fiber.New(fiber.Config{
-		AppName: config.AppConfig.App.AppName,
+		AppName:      config.AppConfig.App.AppName,
+		ErrorHandler: errorHandler,
 	})
 	middlewareApply(app)
 	registerRoutes(app, taskController)
+
 	go log.Fatal(app.Listen(":" + config.AppConfig.App.AppPort))
 }
